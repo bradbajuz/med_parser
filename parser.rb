@@ -9,6 +9,11 @@ end
 
 raw.each do |r|
   r.insert(0, "Acvite", "ACT")
+  
+  r[2].slice!(0..1)
+  if r[2].slice(1) == "0"
+    r[2].slice!(1)
+  end
 end
 
 # For debugging
