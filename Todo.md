@@ -1,7 +1,7 @@
 ### PARSE FILE to CSV CHECK LIST
 
-~~Insert Acvite~~
-~~Insert ACT~~
+~~- Insert Acvite~~
+~~- Insert ACT~~
 - Copy/Insert Account # but leaving out 0
 - Copy/Insert Full Name (Last First I)
 - Copy/Insert Street Address
