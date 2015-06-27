@@ -9,6 +9,11 @@ dch.each do |df|
   raw << df.split()
 end
 
+raw.each do |r|
+  r.insert(0, "Acvite", "ACT")
+
+end
+
 # For debugging
 puts raw
 
