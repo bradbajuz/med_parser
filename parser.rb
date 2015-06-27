@@ -3,15 +3,12 @@ require 'csv'
 raw = Array.new
 
 Dir.chdir "convert"
-dch = File.open("DEM150601.DHA")
-
-dch.each do |df|
-  raw << df.split()
+File.foreach("DEM150601.DHA") do |raw_file|
+  raw << raw_file.split()
 end
 
 raw.each do |r|
   r.insert(0, "Acvite", "ACT")
-
 end
 
 # For debugging
