@@ -2,3 +2,13 @@
 /log/*.log
 /tmp
 .DS_Store
+
+# Ignore all DHA and FAY files because they contain sensitive information.
+/convert/*.[dD][hH][aA]
+/convert/*.[fF][aA][yY]
+*.[dD][hH][aA]
+*.[fF][aA][yY]
+
+# Ignore all CSV files because they contain sensitive information.
+/converted/*.[cC][sS][vV]
+*.[cC][sS][vV]
