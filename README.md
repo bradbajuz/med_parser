@@ -22,3 +22,4 @@
 
 ## Todo
   + Needs to be able to parse adjustments into seperate CSV files
+  - See Full [Todo Checklist] (https://github.com/bradbajuz/med-parser/blob/master/Todo.md)
