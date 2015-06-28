@@ -1,6 +1,7 @@
 require 'csv'
 
-ALPHA = /[A-Za-z]/ 
+ALPHA = /[A-Za-z]/
+MISSING_INITAL = /[pPoO]/
 
 # filename = gets.chomp
 original_data = Array.new
@@ -20,7 +21,7 @@ original_data.each do |o|
   inital = " "
   patient_name << o.slice(2..3).join(" ")
 
-  if o.slice(4) == "PO"
+  if o.slice(4).match(MISSING_INITAL)
     inital ||= ""
   else o.slice(4).match(ALPHA)
     inital << o.slice(4)
