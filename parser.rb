@@ -1,5 +1,7 @@
 require 'csv'
 
+ALPHA = /[A-Za-z]/ 
+
 # filename = gets.chomp
 original_data = Array.new
 converted_data = Array.new
@@ -15,7 +17,15 @@ original_data.each do |o|
   converted_data << o.slice(0)
 
   patient_name = ""
-  patient_name << o.slice(2..4).join(" ")
+  inital = " "
+  patient_name << o.slice(2..3).join(" ")
+
+  if o.slice(4) == "PO"
+    inital ||= ""
+  else o.slice(4).match(ALPHA)
+    inital << o.slice(4)
+  end
+  patient_name << inital
   converted_data << patient_name
 end
 
