@@ -1,25 +1,29 @@
 require 'csv'
 
-raw = Array.new
-
+# filename = gets.chomp
+original_data = Array.new
+converted_data = Array.new
+    
 Dir.chdir "convert"
 File.foreach("DEM150601.DHA") do |raw_file|
-  raw << raw_file.split()
+  original_data << raw_file.split()
 end
 
-raw.each do |r|
-  r.insert(0, "Acvite", "ACT")
+converted_data.insert(0, "Acvite", "ACT")
 
-  r[2].slice!(0..1)
-  if r[2].slice(1) == "0"
-    r[2].slice!(1)
-  end
+original_data.each do |o|
+  converted_data << o.slice(0)
+end
 
-  r.delete_at(3)
+converted_data[2].slice!(0..1)
+if converted_data[2].slice(1) == "0"
+  converted_data[2].slice!(1)
 end
 
 # For debugging
-puts raw
+p converted_data
+puts #############################
+p original_data
 
 # # Use for outputting file
 # Dir.chdir ".."
