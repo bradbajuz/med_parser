@@ -13,6 +13,10 @@ converted_data.insert(0, "Acvite", "ACT")
 
 original_data.each do |o|
   converted_data << o.slice(0)
+
+  patient_name = ""
+  patient_name << o.slice(2..4).join(" ")
+  converted_data << patient_name
 end
 
 converted_data[2].slice!(0..1)
