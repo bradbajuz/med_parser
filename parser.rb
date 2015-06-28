@@ -1,7 +1,7 @@
 require 'csv'
 
 ALPHA = /[A-Za-z]/
-MISSING_INITAL = /[pPoO]/
+MISSING_INITAL = /[POpo]/
 
 # filename = gets.chomp
 original_data = Array.new
