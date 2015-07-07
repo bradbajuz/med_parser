@@ -1,6 +1,6 @@
 require 'csv'
 
-ALPHA = /[A-Za-z]/
+ALPHA = /[A-Z a-z]/
 MISSING_INITIAL = /[POpo]/
 
 # filename = gets.chomp
