@@ -12,15 +12,25 @@ File.foreach('DEM150601.DHA') do |raw_file|
   original_data << raw_file.split
 end
 
+# Needed at beginning of array for each patient
 converted_data.insert(0, 'Acvite', 'ACT')
 
+# Start processing fields
 original_data.each do |o|
   converted_data << o.slice(0)
 
+  # Remove leading zeros from account number
+  converted_data[2].slice!(0..1)
+  if converted_data[2].slice(1) == '0'
+    converted_data[2].slice!(1)
+  end
+
+  # Setup patient name to be processed
   patient_name = ''
   initial = ' '
   patient_name << o.slice(2..3).join(' ')
 
+  # If there is a missing initial, don't bring in letters from next field
   if o.slice(4).match(MISSING_INITIAL)
     initial ||= ''
   else o.slice(4).match(ALPHA)
@@ -30,10 +40,7 @@ original_data.each do |o|
   converted_data << patient_name
 end
 
-converted_data[2].slice!(0..1)
-if converted_data[2].slice(1) == '0'
-  converted_data[2].slice!(1)
-end
+
 
 # For debugging
 p converted_data
