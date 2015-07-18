@@ -39,20 +39,12 @@ original_data.each do |o|
   end
 
   # Setup patient name to be processed
-  # patient_name = ' '
+  patient_name = Array.new
   
-  # patient_name = o.slice(3..4).join(' ')
-  # patient_name.join(' ')
-  # puts patient_name
+  patient_name << o.slice(3..4)
+  converted_data << patient_name.join(' ')
 
-  # # If there is a missing initial, don't bring in 'P' or 'PO'
-  # if o.slice(4).match(ADDR_PO_BOX)
-  #   initial ||= ''
-  # else o.slice(4).match(ALPHA)
-  #   initial << o.slice(4)
-  # end
-  # patient_name << initial
-  # converted_data << patient_name
+
 
   # END Check for nil in converted data and replace with empty string
   converted_data.map! { |x| x ? x : ''}
