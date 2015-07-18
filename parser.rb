@@ -44,6 +44,12 @@ original_data.each do |o|
   patient_name << o.slice(3..4)
   converted_data << patient_name.join(' ')
 
+  # Setup patient address to be processed
+  patient_address = Array.new
+
+  patient_address << o.slice(5)
+  converted_data << patient_address.join(' ')
+
 
 
   # END Check for nil in converted data and replace with empty string
