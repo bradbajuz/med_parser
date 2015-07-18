@@ -8,8 +8,9 @@
 
 ~~ Copy/Insert Full Name (Last First I) ~~
 
+~~ Copy/Insert Street Address ~~
+
 #### TODO
-- Copy/Insert Street Address
 - Insert 2 Commas(, ,)
 - Copy/Insert City
 - Copy/Insert State
