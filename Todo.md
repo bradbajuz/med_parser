@@ -6,9 +6,8 @@
 
 ~~Copy/Insert Account # but leaving out 0~~
 
-~~Copy/Insert Full Name (Last First I)~~
-
 #### TODO
+- Copy/Insert Full Name (Last First I)
 - Copy/Insert Street Address
 - Insert 2 Commas(, ,)
 - Copy/Insert City
@@ -43,3 +42,4 @@
 - Insert commas until next digit or until next alpha character
 - Copy/Insert Insurance Provider
 - Ignore anything after Insurance Provider (mainly numbers)
+- Check for nil
