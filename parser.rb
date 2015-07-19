@@ -57,6 +57,17 @@ original_data.each do |o|
   # 8 digit string
   converted_data << o.slice(11)
 
+  # SSN
+  ssn = ''
+
+  ssn << o.slice(12)
+  if ssn.empty?
+    converted_data << ssn = ' - - '
+  else
+    converted_data << ssn.gsub(/(\d{3})(\d{2})(\d{3})/, '\1-\2-\3')
+  end
+  
+
   # END Check for nil in converted data and replace with empty string
   converted_data.map! { |x| x ? x : ''}
 
