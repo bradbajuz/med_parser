@@ -1,17 +1,5 @@
 require 'csv'
 
-ALPHA = /[A-Z a-z]/
-MISSING_INITIAL = /[POpo]/
-
-# Address Regex
-ADDR_NUMBER = /^(\d+\W|[a-z]+)?(\d+)([a-z]?)\b/io
-ADDR_STREET = /(?:\b(?:\d+\w*|[a-z'-]+)\s*)+/io
-ADDR_CITY = /(?:\b[a-z][a-z'-]+\s*)+/io
-ADDR_ZIP = /\b(\d{5})(?:-(\d{4}))?\b/o
-ADDR_AT = /\s(at|@|and|&)\s/io
-ADDR_PO_BOX = /[POpo]/
-# ADDR_PO_BOX = /\b[p|p]*(ost|ost)*\.*\s*[o|o|0]*(ffice|ffice)*\.*\s*[b|b][o|o|0][x|x]\b/
-
 # filename = gets.chomp
 original_data = Array.new
 final_data = Array.new
@@ -37,7 +25,7 @@ original_data.each do |o|
 
   # Remove leading zeros from account number
   # This will fail if imported file has more than two empty lines
-  converted_data[2].slice!(0)
+  converted_data[2].slice!(0..1)
   if converted_data[2].slice(1) == '0'
     converted_data[2].slice!(1)
   end
