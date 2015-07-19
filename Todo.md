@@ -45,3 +45,7 @@
 - Copy/Insert Insurance Provider
 - Ignore anything after Insurance Provider (mainly numbers)
 - Check for nil
+
+### BUGS
+- Program will fail if imported file has more than two empty lines because of nil. Check file before import as possible fix?
+- Watch out for array that get inserted on last line that only includes "Acvite, ACT, , ". Issue with multiple blank lines and/or lines with non-patient data

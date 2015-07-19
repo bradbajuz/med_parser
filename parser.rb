@@ -14,25 +14,29 @@ ADDR_PO_BOX = /[POpo]/
 
 # filename = gets.chomp
 original_data = Array.new
-converted_data = Array.new
+final_data = Array.new
     
 Dir.chdir 'convert'
 CSV.foreach('CAREPRODEMO.CSV') do |raw_file|
   original_data << raw_file
 end
 
-# Needed at beginning of array for each patient
-converted_data.insert(0, 'Acvite', 'ACT')
-
 # Start processing fields
 original_data.each do |o|
+  converted_data = Array.new
+
+  # Needed at beginning of array for each patient
+  # Watch out for array that get inserted on last line that only includes below line of code
+  converted_data.insert(0, 'Acvite', 'ACT')
 
   # BEGIN Check for nil in original data and replace with empty string
   o.map! { |x| x ? x : ''}
 
+  # Add in account number
   converted_data << o.slice(0)
 
   # Remove leading zeros from account number
+  # This will fail if imported file has more than two empty lines
   converted_data[2].slice!(0)
   if converted_data[2].slice(1) == '0'
     converted_data[2].slice!(1)
@@ -55,10 +59,12 @@ original_data.each do |o|
   # END Check for nil in converted data and replace with empty string
   converted_data.map! { |x| x ? x : ''}
 
+  final_data << converted_data
+
 end
 
 # For debugging
-p converted_data
+p final_data
 puts #############################
 p original_data
 
