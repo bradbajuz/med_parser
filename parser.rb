@@ -65,7 +65,9 @@ original_data.each do |o|
 
   # Zip
   converted_data << o.slice(10)
-  
+
+  # 8 digit string
+  converted_data << o.slice(11)
 
   # END Check for nil in converted data and replace with empty string
   converted_data.map! { |x| x ? x : ''}

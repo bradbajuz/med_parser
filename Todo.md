@@ -18,8 +18,9 @@
 
 ~~Copy/Insert Zip~~
 
+~~Copy/Insert 8 digit string~~
+
 #### TODO
-- Copy/Insert up to first 8 digits of 17 character string
 - Copy/Insert last 9 digits (SSN) of 17 character string. Add (- -) if SSN is blank (no 9 digits in 17 character string)
 - Copy/Insert 10 digit personal phone number. Needs to be in the format of (123) 456-7890. Should be all digits up to last name
 - Copy/Insert Total (xxxx.xx) by starting at first (? alpha character or blank and/or "+" up to second "+", ignore first 3 zero's, take only next 6 digits)
