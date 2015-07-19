@@ -54,7 +54,18 @@ original_data.each do |o|
   patient_address << o.slice(5)
   converted_data << patient_address.join(' ')
 
+  # Usually empty
+  converted_data << o.slice(6)
 
+  # City
+  converted_data << o.slice(8)
+
+  # State
+  converted_data << o.slice(9)
+
+  # Zip
+  converted_data << o.slice(10)
+  
 
   # END Check for nil in converted data and replace with empty string
   converted_data.map! { |x| x ? x : ''}

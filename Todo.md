@@ -10,11 +10,15 @@
 
 ~~ Copy/Insert Street Address ~~
 
+~~ Insert 2 Commas(, ,) ~~
+
+~~ Copy/Insert City ~~
+
+~~ Copy/Insert State ~~
+
+~~ Copy/Insert Zip ~~
+
 #### TODO
-- Insert 2 Commas(, ,)
-- Copy/Insert City
-- Copy/Insert State
-- Copy/Insert Zip
 - Copy/Insert up to first 8 digits of 17 character string
 - Copy/Insert last 9 digits (SSN) of 17 character string. Add (- -) if SSN is blank (no 9 digits in 17 character string)
 - Copy/Insert 10 digit personal phone number. Needs to be in the format of (123) 456-7890. Should be all digits up to last name
