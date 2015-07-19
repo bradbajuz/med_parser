@@ -82,7 +82,7 @@ original_data.each do |o|
     converted_data << patient_phone = '( ) - '
   end
 
-  # Patient amount
+  # Patient total
   patient_amount = ''
 
   patient_amount << o.slice(28)
