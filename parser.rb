@@ -1,6 +1,7 @@
 require 'csv'
 
 PATIENT_PHONE = /(\d{3})(\d{3})(\d{4})/
+PATIENT_SSN = /(\d{3})(\d{2})(\d{3})/
 
 # filename = gets.chomp
 original_data = Array.new
@@ -60,13 +61,13 @@ original_data.each do |o|
   converted_data << o.slice(11)
 
   # SSN
-  ssn = ''
+  patient_ssn = ''
 
-  ssn << o.slice(12)
-  if ssn.empty?
-    converted_data << ssn = ' - - '
+  patient_ssn << o.slice(12)
+  if patient_ssn.empty?
+    converted_data << patient_ssn = ' - - '
   else
-    converted_data << ssn.gsub(/(\d{3})(\d{2})(\d{3})/, '\1-\2-\3')
+    converted_data << patient_ssn.gsub(PATIENT_SSN, '\1-\2-\3')
   end
   
   # Phone number
