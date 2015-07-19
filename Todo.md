@@ -1,6 +1,7 @@
 ### PARSE FILE to CSV CHECK LIST
 
 ~~Insert Acvite~~
+
 ~~Insert ACT~~
 
 ~~Copy/Insert Account # but leaving out 0~~
