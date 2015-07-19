@@ -1,5 +1,7 @@
 require 'csv'
 
+PATIENT_PHONE = /(\d{3})(\d{3})(\d{4})/
+
 # filename = gets.chomp
 original_data = Array.new
 final_data = Array.new
@@ -66,6 +68,19 @@ original_data.each do |o|
   else
     converted_data << ssn.gsub(/(\d{3})(\d{2})(\d{3})/, '\1-\2-\3')
   end
+  
+  # Phone number
+  patient_phone = ''
+
+  patient_phone << o.slice(13)
+  if patient_phone.match(PATIENT_PHONE)
+    converted_data << patient_phone.gsub(PATIENT_PHONE, '(\1) \2-\3')
+  elsif patient_phone.match('UNK')
+    converted_data << patient_phone = '(UNK) - '
+  else
+    converted_data << patient_phone = '( ) - '
+  end
+
   
 
   # END Check for nil in converted data and replace with empty string
