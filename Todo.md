@@ -6,17 +6,17 @@
 
 ~~Copy/Insert Account # but leaving out 0~~
 
-~~ Copy/Insert Full Name (Last First I) ~~
+~~Copy/Insert Full Name (Last First I)~~
 
-~~ Copy/Insert Street Address ~~
+~~Copy/Insert Street Address~~
 
-~~ Insert 2 Commas(, ,) ~~
+~~Insert 2 Commas(, ,)~~
 
-~~ Copy/Insert City ~~
+~~Copy/Insert City~~
 
-~~ Copy/Insert State ~~
+~~Copy/Insert State~~
 
-~~ Copy/Insert Zip ~~
+~~Copy/Insert Zip~~
 
 #### TODO
 - Copy/Insert up to first 8 digits of 17 character string
