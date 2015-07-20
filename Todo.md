@@ -32,8 +32,9 @@
 
 ~~Insert a "4"~~
 
+~~Copy/Insert Insurance Provider~~
+
 #### TODO
-- Copy/Insert Insurance Provider
 - Copy/Insert Insurance Provider Street/PO Box Address
 - Insert 2 Commas(, ,)
 - Copy/Insert City State Zip (some zip codes have a "-", if so get only next 3 digits)
