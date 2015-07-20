@@ -105,6 +105,13 @@ original_data.each do |o|
   # Usually empty
   converted_data << o.slice(50)
 
+  # Insurance address
+  insurance_address = Array.new
+  
+  insurance_address << o.slice(51..53)
+  converted_data << insurance_address.join(' ')
+
+
 
   # END Check for nil in converted data and replace with empty string
   converted_data.map! { |x| x ? x : ''}
