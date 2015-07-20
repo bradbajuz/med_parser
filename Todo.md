@@ -26,9 +26,11 @@
 
 ~~Copy/Insert Total (xxxx.xx) by starting at first (? alpha character or blank and/or "+" up to second "+", ignore first 3 zero's, take only next 6 digits)~~
 
+~~Copy/Insert following Total copy, get next 8 digits (similar as next 8 digits)~~
+
+~~Copy/Insert following Total copy, get next 8 digits (similar as previous 8 digits)~~
+
 #### TODO
-- Copy/Insert following Total copy, get next 8 digits (same as next 8 digits)
-- Copy/Insert following Total copy, get next 8 digits (same as previous 8 digits)
 - Insert a "4"
 - Copy/Insert Insurance Provider
 - Copy/Insert Insurance Provider Street/PO Box Address

@@ -89,6 +89,11 @@ original_data.each do |o|
   patient_total.gsub!(/^0+/, "")
   converted_data << patient_total.insert(-3, '.')
 
+  # Next to fileds with eight digit numbers
+  converted_data << o.slice(29)
+  converted_data << o.slice(30)
+
+
   # END Check for nil in converted data and replace with empty string
   converted_data.map! { |x| x ? x : ''}
 
