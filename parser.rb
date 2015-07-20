@@ -99,6 +99,8 @@ original_data.each do |o|
   # Insert insurance
   converted_data << o.slice(48)
 
+  # Insurance address
+  converted_data << o.slice(49)
 
 
   # END Check for nil in converted data and replace with empty string
