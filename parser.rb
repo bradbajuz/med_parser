@@ -83,11 +83,11 @@ original_data.each do |o|
   end
 
   # Patient total
-  patient_amount = ''
+  patient_total = ''
 
-  patient_amount << o.slice(28)
-  patient_amount.gsub!(/^0+/, "")
-  converted_data << patient_amount.insert(-3, '.')
+  patient_total << o.slice(28)
+  patient_total.gsub!(/^0+/, "")
+  converted_data << patient_total.insert(-3, '.')
 
   # END Check for nil in converted data and replace with empty string
   converted_data.map! { |x| x ? x : ''}
