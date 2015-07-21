@@ -1,6 +1,7 @@
 require 'csv'
 
-PATIENT_PHONE = /(\d{3})(\d{3})(\d{4})/
+#Regex
+PHONE = /(\d{3})(\d{3})(\d{4})/
 PATIENT_SSN = /(\d{3})(\d{2})(\d{3})/
 
 # filename = gets.chomp
@@ -74,8 +75,8 @@ original_data.each do |o|
   patient_phone = ''
 
   patient_phone << o.slice(13)
-  if patient_phone.match(PATIENT_PHONE)
-    converted_data << patient_phone.gsub(PATIENT_PHONE, '(\1) \2-\3')
+  if patient_phone.match(PHONE)
+    converted_data << patient_phone.gsub(PHONE, '(\1) \2-\3')
   elsif patient_phone.match('UNK')
     converted_data << patient_phone = '(UNK) - '
   else
@@ -111,7 +112,18 @@ original_data.each do |o|
   insurance_address << o.slice(51..53)
   converted_data << insurance_address.join(' ')
 
+  # Insurance phone number
+  insurance_phone = ''
 
+  insurance_phone << o.slice(54)
+  if insurance_phone.match(PHONE)
+    converted_data << insurance_phone.gsub(PHONE, '(\1) \2-\3')
+  elsif insurance_phone.match('UNK')
+    converted_data << insurance_phone = '(UNK) - '
+  else
+    converted_data << insurance_phone = '( ) - '
+  end
+  
 
   # END Check for nil in converted data and replace with empty string
   converted_data.map! { |x| x ? x : ''}

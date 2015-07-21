@@ -38,10 +38,11 @@
 
 ~~Insert 2 Commas(, ,)~~
 
-~~ Copy/Insert City State Zip (some zip codes have a "-", if so get only next 3 digits)~~
+~~Copy/Insert City State Zip (some zip codes have a "-", if so get only next 3 digits)~~
+
+~~Copy/Insert 10 digit provider phone number. Needs to be in the format of (123) 456-7890. Should be all digits up to last name. If blank, insert "( ) - "~~
 
 #### TODO
-- Copy/Insert 10 digit provider phone number. Needs to be in the format of (123) 456-7890. Should be all digits up to last name. If blank, insert "( ) - "
 - Copy/Insert all digits up to first alpha character
 - Insert a "4"
 - Insert 4 Commas ( , , , ,) if nothing exists
