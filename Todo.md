@@ -46,7 +46,9 @@
 
 ~~Copy/Insert all digits up to first alpha character~~
 
-~~Insert a "4"~~
+~~Copy/Insert a "4"~~
+
+~~Copy/Insert next insurance name~~
 
 #### TODO
 - Insert 4 Commas ( , , , ,) if nothing exists

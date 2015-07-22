@@ -87,7 +87,7 @@ original_data.each do |o|
   patient_total = ''
 
   patient_total << o.slice(28)
-  patient_total.gsub!(/^0+/, "")
+  patient_total.gsub!(/^0+/, '')
   converted_data << patient_total.insert(-3, '.')
 
   # Next two fileds with eight digit numbers
@@ -132,6 +132,9 @@ original_data.each do |o|
 
   # Insert a 4
   converted_data.insert(-1, '4')
+
+  # Insurance name (sometimes empty)
+  converted_data << o.slice(60)
 
 
   # END Check for nil in converted data and replace with empty string
