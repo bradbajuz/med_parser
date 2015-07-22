@@ -68,8 +68,9 @@
 
 ~~Insert " Dr Info"~~
 
+~~Insert numbers and ailment~~
+
 #### TODO
-- Copy/Insert all characters up to next digit
 - Copy/Insert all characters up to next alpha character
 - Copy/Insert Doctor name if it exists. If not, Insert 
 - Insert commas until next digit or until next alpha character
