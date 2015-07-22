@@ -191,6 +191,9 @@ original_data.each do |o|
   # Ailment
   converted_data << o.slice(134..135).join('')
 
+  # String of numbers
+  converted_data << o.slice(136..143).join(' ')
+
 
   # END Check for nil in converted data and replace with empty string
   converted_data.map! { |x| x ? x : ''}
