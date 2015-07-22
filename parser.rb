@@ -133,8 +133,33 @@ original_data.each do |o|
   # Insert a 4
   converted_data.insert(-1, '4')
 
-  # Insurance name (sometimes empty)
+  # Other Insurance name (sometimes empty)
   converted_data << o.slice(60)
+
+  # Other Insurance address (sometimes empty)
+  converted_data << o.slice(61)
+
+  # Other Usually empty (sometimes empty)
+  converted_data << o.slice(62)
+
+  # Other Insurance address (sometimes empty)
+  insurance_address = Array.new
+  
+  insurance_address << o.slice(63..65)
+  converted_data << insurance_address.join(' ')
+
+  # Other Insurance phone number (sometimes empty)
+  insurance_phone = ''
+
+  insurance_phone << o.slice(66)
+  if insurance_phone.match(PHONE)
+    converted_data << insurance_phone.gsub(PHONE, '(\1) \2-\3')
+  elsif insurance_phone.match('UNK')
+    converted_data << insurance_phone = '(UNK) - '
+  else
+    converted_data << insurance_phone = '( ) - '
+  end
+
 
 
   # END Check for nil in converted data and replace with empty string

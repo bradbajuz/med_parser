@@ -50,8 +50,9 @@
 
 ~~Copy/Insert next insurance name~~
 
+~~Insert 4 Commas ( , , , ,) if nothing exists~~
+
 #### TODO
-- Insert 4 Commas ( , , , ,) if nothing exists
 - Insert "( ) - " if nothing exists
 - Insert 3 Commas ( , , ,)
 - Insert a "4"
