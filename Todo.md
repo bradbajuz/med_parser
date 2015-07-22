@@ -51,15 +51,15 @@
 ~~Copy/Insert next insurance name~~
 
 ~~Insert 4 Commas ( , , , ,) if nothing exists~~
+~~Insert "( ) - " if nothing exists~~
+~~Insert 3 Commas ( , , ,)~~
+~~Insert a "4"~~
+~~Insert 4 Commas ( , , , ,) if nothing exists~~
+~~Insert "( ) - " if nothing exists~~
+~~Insert 3 Commas ( , , ,)~~
+~~Insert a "4"~~
 
 #### TODO
-- Insert "( ) - " if nothing exists
-- Insert 3 Commas ( , , ,)
-- Insert a "4"
-- Insert 4 Commas ( , , , ,) if nothing exists
-- Insert "( ) - " if nothing exists
-- Insert 3 Commas ( , , ,)
-- Insert a "4"
 - Insert " Dr Info"
 - Copy/Insert all characters up to next digit
 - Copy/Insert all characters up to next alpha character

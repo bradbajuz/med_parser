@@ -17,6 +17,11 @@ end
 original_data.each do |o|
   converted_data = Array.new
 
+  # Setup reoccurring variables
+  empty_space = ' '
+  number_four = '4'
+  empty_phone = '( ) - '
+
   # Needed at beginning of array for each patient
   # Watch out for array that get inserted on last line that only includes below line of code
   converted_data.insert(0, 'Acvite', 'ACT')
@@ -80,7 +85,7 @@ original_data.each do |o|
   elsif patient_phone.match('UNK')
     converted_data << patient_phone = '(UNK) - '
   else
-    converted_data << patient_phone = '( ) - '
+    converted_data << patient_phone = empty_phone
   end
 
   # Patient total
@@ -95,7 +100,7 @@ original_data.each do |o|
   converted_data << o.slice(30)
 
   # Insert a 4
-  converted_data.insert(-1, '4')
+  converted_data.insert(-1, number_four)
 
   # Insert insurance
   converted_data << o.slice(48)
@@ -121,7 +126,7 @@ original_data.each do |o|
   elsif insurance_phone.match('UNK')
     converted_data << insurance_phone = '(UNK) - '
   else
-    converted_data << insurance_phone = '( ) - '
+    converted_data << insurance_phone = empty_phone
   end
 
   # Usually empty
@@ -131,7 +136,9 @@ original_data.each do |o|
   converted_data << o.slice(58)
 
   # Insert a 4
-  converted_data.insert(-1, '4')
+  converted_data.insert(-1, number_four)
+
+  # Other is ,4, , , , ,( ) - , , ,4, , , , ,( ) - , , ,4,
 
   # Other Insurance name (sometimes empty)
   converted_data << o.slice(60)
@@ -149,18 +156,34 @@ original_data.each do |o|
   converted_data << insurance_address.join(' ')
 
   # Other Insurance phone number (sometimes empty)
-  insurance_phone = ''
+  other_insurance_phone = ''
 
-  insurance_phone << o.slice(66)
-  if insurance_phone.match(PHONE)
-    converted_data << insurance_phone.gsub(PHONE, '(\1) \2-\3')
-  elsif insurance_phone.match('UNK')
-    converted_data << insurance_phone = '(UNK) - '
+  other_insurance_phone << o.slice(66)
+  if other_insurance_phone.match(PHONE)
+    converted_data << other_insurance_phone.gsub(PHONE, '(\1) \2-\3')
+  elsif other_insurance_phone.match('UNK')
+    converted_data << other_insurance_phone = '(UNK) - '
   else
-    converted_data << insurance_phone = '( ) - '
+    converted_data << other_insurance_phone = empty_phone
   end
 
+  # Other usually empty
 
+  2.times do
+    converted_data.insert(-1, empty_space)
+  end
+
+  converted_data.insert(-1, number_four)
+
+  4.times do
+    converted_data.insert(-1, empty_space)
+  end
+  converted_data.insert(-1, empty_phone)
+
+  2.times do
+    converted_data.insert(-1, empty_space)
+  end
+  converted_data.insert(-1, number_four)
 
   # END Check for nil in converted data and replace with empty string
   converted_data.map! { |x| x ? x : ''}
