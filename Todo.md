@@ -42,6 +42,8 @@
 
 ~~Copy/Insert 10 digit provider phone number. Needs to be in the format of (123) 456-7890. Should be all digits up to last name. If blank, insert "( ) - "~~
 
+~~Insert empty field~~
+
 #### TODO
 - Copy/Insert all digits up to first alpha character
 - Insert a "4"
