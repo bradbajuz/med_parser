@@ -185,6 +185,10 @@ original_data.each do |o|
   end
   converted_data.insert(-1, number_four)
 
+  # Dr Info
+  converted_data << ' Dr Info'
+
+
   # END Check for nil in converted data and replace with empty string
   converted_data.map! { |x| x ? x : ''}
 

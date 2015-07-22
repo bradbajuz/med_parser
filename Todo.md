@@ -66,8 +66,9 @@
 
 ~~Insert a "4"~~
 
+~~Insert " Dr Info"~~
+
 #### TODO
-- Insert " Dr Info"
 - Copy/Insert all characters up to next digit
 - Copy/Insert all characters up to next alpha character
 - Copy/Insert Doctor name if it exists. If not, Insert 
