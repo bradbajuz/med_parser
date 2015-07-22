@@ -127,6 +127,10 @@ original_data.each do |o|
   # Usually empty
   converted_data << o.slice(57)
 
+  # Insurance number
+  converted_data << o.slice(58)
+
+
   # END Check for nil in converted data and replace with empty string
   converted_data.map! { |x| x ? x : ''}
 

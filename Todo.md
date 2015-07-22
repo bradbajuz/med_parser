@@ -44,8 +44,9 @@
 
 ~~Insert empty field~~
 
+~~Copy/Insert all digits up to first alpha character~~
+
 #### TODO
-- Copy/Insert all digits up to first alpha character
 - Insert a "4"
 - Insert 4 Commas ( , , , ,) if nothing exists
 - Insert "( ) - " if nothing exists
