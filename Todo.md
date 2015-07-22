@@ -46,8 +46,9 @@
 
 ~~Copy/Insert all digits up to first alpha character~~
 
+~~Insert a "4"~~
+
 #### TODO
-- Insert a "4"
 - Insert 4 Commas ( , , , ,) if nothing exists
 - Insert "( ) - " if nothing exists
 - Insert 3 Commas ( , , ,)
