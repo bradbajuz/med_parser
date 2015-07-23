@@ -194,6 +194,10 @@ original_data.each do |o|
   # String of numbers
   converted_data << o.slice(136..143).join(' ')
 
+  # Number data
+  number_data = o.slice(144..167)
+  converted_data.concat(number_data)
+
 
   # END Check for nil in converted data and replace with empty string
   converted_data.map! { |x| x ? x : ''}

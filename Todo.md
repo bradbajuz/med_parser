@@ -70,7 +70,9 @@
 
 ~~Insert numbers and ailment~~
 
-~~ Insert/add string of numbers~~
+~~Insert/add string of numbers~~
+
+~~Insert empty data~~
 
 #### TODO
 - Copy/Insert Doctor name if it exists. If not, Insert 
