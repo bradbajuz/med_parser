@@ -74,11 +74,13 @@
 
 ~~Insert empty data~~
 
+~~Copy/Insert Doctor name if it exists. If not, Insert~~
+
+~~Copy/Insert Insurance Provider~~
+
+~~Ignore anything after Insurance Provider (mainly numbers)~~
+
 #### TODO
-- Copy/Insert Doctor name if it exists. If not, Insert 
-- Insert commas until next digit or until next alpha character
-- Copy/Insert Insurance Provider
-- Ignore anything after Insurance Provider (mainly numbers)
 - Check for nil
 
 ### BUGS

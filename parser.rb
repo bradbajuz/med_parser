@@ -194,9 +194,16 @@ original_data.each do |o|
   # String of numbers
   converted_data << o.slice(136..143).join(' ')
 
-  # Number data
+  # Number data with doctors name at end
   number_data = o.slice(144..167)
   converted_data.concat(number_data)
+
+  # Insurance
+  if o.slice(169) == 'Y'
+    converted_data << o.slice(168..169).join(' ')
+  else
+    converted_data << o.slice(168)
+  end
 
 
   # END Check for nil in converted data and replace with empty string
