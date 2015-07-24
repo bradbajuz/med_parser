@@ -4,14 +4,15 @@ require 'csv'
 PHONE = /(\d{3})(\d{3})(\d{4})/
 PATIENT_SSN = /(\d{3})(\d{2})(\d{3})/
 
-# filename = gets.chomp
 original_data = Array.new
 final_data = Array.new
 
 Dir.chdir '..'
 Dir.chdir 'convert'
-CSV.foreach('CAREPRODEMO.CSV') do |raw_file|
-  original_data << raw_file
+filename = Dir.glob('*.csv').each do |f|
+  CSV.foreach(f) do |raw_file|
+    original_data << raw_file
+  end
 end
 
 # Start processing fields
@@ -217,11 +218,17 @@ puts #############################
 p original_data
 
 # Use for outputting main file
-Dir.chdir '..'
-Dir.chdir 'converted'
-File.open('DEM DCH MEDICAID.csv', 'w') do |f|
-  f.write(final_data.inject([]) { |csv, row| csv << CSV.generate_line(row) }.join(''))
+filename.each do |new_file|
+  Dir.chdir '..'
+  Dir.chdir 'converted'
+
+  File.open(new_file, 'w') do |f|
+    f.write(final_data.inject([]) { |csv, row| csv << CSV.generate_line(row) }.join(''))
+  end
 end
+
+
+
 
 # Bring in adjustment script and run
 Dir.chdir '..'
