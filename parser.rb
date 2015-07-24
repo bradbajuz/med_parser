@@ -218,7 +218,7 @@ p original_data
 # Use for outputting file
 Dir.chdir '..'
 Dir.chdir 'converted'
-File.open('DEM DCH MEDICAID.csv', 'w', { col_sep: "\t", force_quotes: false }) do |f|
+File.open('DEM DCH MEDICAID.csv', 'w') do |f|
   f.write(final_data.inject([]) { |csv, row| csv << CSV.generate_line(row) }.join(''))
 end
 
