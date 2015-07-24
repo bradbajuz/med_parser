@@ -220,6 +220,7 @@ p final_data
 puts "#############################"
 p original_data
 
+p "Total patients: #{final_data.length}"
 
 # Use for outputting main file
 Dir.chdir '..'

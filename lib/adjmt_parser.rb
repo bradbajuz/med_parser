@@ -60,6 +60,8 @@ end
 # puts "#############################""
 # p original_data
 
+p "Total patients: #{final_data.length}"
+
 # Use for outputting adjustment file
 Dir.chdir '..'
 Dir.chdir 'converted'
