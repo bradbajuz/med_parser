@@ -222,3 +222,6 @@ File.open('DEM DCH MEDICAID.csv', 'w') do |f|
   f.write(final_data.inject([]) { |csv, row| csv << CSV.generate_line(row) }.join(''))
 end
 
+# Bring in adjustment script and run
+Dir.chdir '..'
+load 'adjmt_parser.rb'
