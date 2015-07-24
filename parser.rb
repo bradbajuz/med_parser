@@ -205,10 +205,7 @@ original_data.each do |o|
     converted_data << o.slice(168)
   end
 
-
-  # END Check for nil in converted data and replace with empty string
-  converted_data.map! { |x| x ? x : ''}
-
+  #Output data to final array
   final_data << converted_data
 
 end
@@ -218,9 +215,10 @@ p final_data
 puts #############################
 p original_data
 
-# # Use for outputting file
-# Dir.chdir ".."
-# Dir.chdir "converted"
-# n = File.new("DEM DCH MEDICAID.csv", "w+")
+# Use for outputting file
+Dir.chdir '..'
+Dir.chdir 'converted'
+File.open('DEM DCH MEDICAID.csv', 'w', { col_sep: "\t", force_quotes: false }) do |f|
+  f.write(final_data.inject([]) { |csv, row| csv << CSV.generate_line(row) }.join(''))
+end
 
-# puts n << final_data
