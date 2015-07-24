@@ -200,14 +200,14 @@ original_data.each do |o|
   converted_data << o.slice(136..143).join(' ')
 
   # Number data with doctors name at end
-  number_data = o.slice(144..167)
+  number_data = o.slice(144..165)
   converted_data.concat(number_data)
 
   # Insurance
-  if o.slice(169) == 'Y'
-    converted_data << o.slice(168..169).join(' ')
+  if o.slice(167) == 'Y'
+    converted_data << o.slice(166..167).join(' ')
   else
-    converted_data << o.slice(168)
+    converted_data << o.slice(167)
   end
 
   #Output data to final array
@@ -217,8 +217,9 @@ end
 
 # For debugging
 p final_data
-puts #############################
+puts "#############################"
 p original_data
+
 
 # Use for outputting main file
 Dir.chdir '..'

@@ -55,10 +55,10 @@ original_data.each do |o|
   final_data << converted_data
 end
 
-# For debugging
-p final_data
-puts #############################
-p original_data
+# # For debugging
+# p final_data
+# puts "#############################""
+# p original_data
 
 # Use for outputting adjustment file
 Dir.chdir '..'
