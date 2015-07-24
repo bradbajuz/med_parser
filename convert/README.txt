@@ -1,1 +1,1 @@
-Place your DCH and FAY raw files in here
+Place your DCH and FAY delimited files in here
