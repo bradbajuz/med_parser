@@ -36,7 +36,10 @@ original_data.each do |o|
 
   # Remove leading zeros from account number
   # This will fail if imported file has more than two empty lines
-  converted_data[2].slice!(0..1)
+  
+  # Only needed if  there are two leading zeros before D
+  # converted_data[2].slice!(0..1)
+
   if converted_data[2].slice(1) == '0'
     converted_data[2].slice!(1)
   end
