@@ -7,7 +7,8 @@ PATIENT_SSN = /(\d{3})(\d{2})(\d{3})/
 # filename = gets.chomp
 original_data = Array.new
 final_data = Array.new
-    
+
+Dir.chdir '..'
 Dir.chdir 'convert'
 CSV.foreach('CAREPRODEMO.CSV') do |raw_file|
   original_data << raw_file
@@ -224,4 +225,5 @@ end
 
 # Bring in adjustment script and run
 Dir.chdir '..'
+Dir.chdir 'lib'
 load 'adjmt_parser.rb'

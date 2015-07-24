@@ -2,7 +2,8 @@ require 'csv'
 
 original_data = Array.new
 final_data = Array.new
-    
+
+Dir.chdir '..'
 Dir.chdir 'convert'
 CSV.foreach('CAREPRODEMO.CSV') do |raw_file|
   original_data << raw_file
