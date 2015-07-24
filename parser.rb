@@ -215,7 +215,7 @@ p final_data
 puts #############################
 p original_data
 
-# Use for outputting file
+# Use for outputting main file
 Dir.chdir '..'
 Dir.chdir 'converted'
 File.open('DEM DCH MEDICAID.csv', 'w') do |f|
