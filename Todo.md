@@ -80,6 +80,8 @@
 
 ~~Ignore anything after Insurance Provider (mainly numbers)~~
 
+~~Add abilty to export to CSV~~
+
 #### TODO
 - Check for nil
 
