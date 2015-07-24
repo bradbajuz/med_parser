@@ -5,8 +5,10 @@ final_data = Array.new
 
 Dir.chdir '..'
 Dir.chdir 'convert'
-CSV.foreach('CAREPRODEMO.CSV') do |raw_file|
-  original_data << raw_file
+filename = Dir.glob('*.csv').each do |f|
+  CSV.foreach(f) do |raw_file|
+    original_data << raw_file
+  end
 end
 
 # Start processing fields
@@ -58,9 +60,12 @@ p final_data
 puts #############################
 p original_data
 
-# Use for outputting main file
+# Use for outputting adjustment file
 Dir.chdir '..'
 Dir.chdir 'converted'
-File.open('ADJUSTMENT DCH MEDICAID.csv', 'w') do |f|
-  f.write(final_data.inject([]) { |csv, row| csv << CSV.generate_line(row) }.join(''))
+filename.each do |new_file|
+
+  File.open("ADJUSTMENTS #{new_file}", 'w') do |f|
+    f.write(final_data.inject([]) { |csv, row| csv << CSV.generate_line(row) }.join(''))
+  end
 end

@@ -36,7 +36,7 @@ original_data.each do |o|
 
   # Remove leading zeros from account number
   # This will fail if imported file has more than two empty lines
-  
+
   # Only needed if  there are two leading zeros before D
   # converted_data[2].slice!(0..1)
 
@@ -221,10 +221,10 @@ puts #############################
 p original_data
 
 # Use for outputting main file
+Dir.chdir '..'
+Dir.chdir 'converted'
 filename.each do |new_file|
-  Dir.chdir '..'
-  Dir.chdir 'converted'
-
+  
   File.open(new_file, 'w') do |f|
     f.write(final_data.inject([]) { |csv, row| csv << CSV.generate_line(row) }.join(''))
   end
