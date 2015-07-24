@@ -82,8 +82,10 @@
 
 ~~Add abilty to export to CSV~~
 
+~~Implement Adjustments~~
+
 #### TODO
-- Check for nil
+- Check for nil at end of file
 
 ### BUGS
 - Program will fail if imported file has more than two empty lines because of nil. Check file before import as possible fix?
