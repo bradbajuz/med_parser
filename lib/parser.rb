@@ -10,9 +10,16 @@ final_data = Array.new
 Dir.chdir '..'
 Dir.chdir 'convert'
 filename = Dir.glob('*.csv').each do |f|
-  CSV.foreach(f) do |raw_file|
+  CSV.foreach(f) do |raw_file| 
     original_data << raw_file
   end
+end
+
+# Remove last element in array that has unneded data
+if original_data.last.empty?
+  original_data.pop(2)
+else
+  original_data.pop
 end
 
 # Start processing fields

@@ -11,6 +11,13 @@ filename = Dir.glob('*.csv').each do |f|
   end
 end
 
+# Remove last element in array that has unneded data
+if original_data.last.empty?
+  original_data.pop(2)
+else
+  original_data.pop
+end
+
 # Start processing fields
 original_data.each do |o|
   converted_data = Array.new
