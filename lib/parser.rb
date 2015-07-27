@@ -2,6 +2,7 @@ require 'csv'
 
 #Regex
 PHONE = /(\d{3})(\d{3})(\d{4})/
+INCOMPLETE_PHONE = /\d/
 PATIENT_SSN = /(\d{3})(\d{2})(\d{3})/
 
 original_data = Array.new
@@ -139,6 +140,8 @@ original_data.each do |o|
     converted_data << insurance_phone.gsub(PHONE, '(\1) \2-\3')
   elsif insurance_phone.match('UNK')
     converted_data << insurance_phone = '(UNK) - '
+  elsif insurance_phone.match(INCOMPLETE_PHONE)
+    converted_data << insurance_phone.gsub(PHONE, '(\1) \2-\3')
   else
     converted_data << insurance_phone = empty_phone
   end
