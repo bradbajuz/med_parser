@@ -4,6 +4,7 @@ require 'csv'
 PHONE = /(\d{3})(\d{3})(\d{4})/
 INCOMPLETE_PHONE = /\d/
 PATIENT_SSN = /(\d{3})(\d{2})(\d{3})/
+DOCTOR_NAME = /[\s,]/
 
 original_data = Array.new
 final_data = Array.new
@@ -212,8 +213,13 @@ original_data.each do |o|
   converted_data << o.slice(134..143).join(' ').strip
 
   # Doctors name
-  doctor_name = o.slice(144..153)
-  converted_data.concat(doctor_name)
+  converted_data << o.slice(144).gsub(DOCTOR_NAME,' ')
+
+  doctor_name = ''
+  doctor_name << o.slice(146..147).join('')
+  converted_data << doctor_name.gsub(DOCTOR_NAME,' ')
+
+  
 
   # Insurance
   if o.slice(167) == 'Y'
