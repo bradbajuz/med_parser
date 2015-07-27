@@ -155,8 +155,6 @@ original_data.each do |o|
   # Insert a 4
   converted_data.insert(-1, number_four)
 
-  # Other format is ,4, , , , ,( ) - , , ,4, , , , ,( ) - , , ,4,
-
   # Other Insurance name (sometimes empty)
   converted_data << o.slice(59)
 
