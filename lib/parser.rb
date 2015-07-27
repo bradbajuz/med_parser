@@ -16,6 +16,8 @@ filename = Dir.glob('*.csv').each do |f|
 end
 
 # Remove last element in array that has unneded data
+# Expecting up to 1 blank line and last line with total or just line with total
+# Broken if not meeting above rquirements.
 if original_data.last.empty?
   original_data.pop(2)
 else
