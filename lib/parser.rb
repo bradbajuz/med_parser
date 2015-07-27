@@ -208,8 +208,8 @@ original_data.each do |o|
   # Diagnostic code and ailment
   converted_data << o.slice(132..133).join(' ')
 
-  # String of numbers
-  converted_data << o.slice(136..143).join(' ')
+  # Hick picks (HCPCS Codes)
+  converted_data << o.slice(134..143).join(' ')
 
   # Number data with doctors name at end
   number_data = o.slice(144..165)
