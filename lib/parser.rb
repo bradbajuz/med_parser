@@ -203,7 +203,7 @@ original_data.each do |o|
   converted_data.insert(-1, number_four)
 
   # Dr Info
-  converted_data << ' Dr Info'
+  converted_data << 'Dr Info'
 
   # Ailment
   converted_data << o.slice(134..135).join('')
