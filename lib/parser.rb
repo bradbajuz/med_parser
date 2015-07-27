@@ -219,7 +219,13 @@ original_data.each do |o|
   doctor_name << o.slice(146..147).join('')
   converted_data << doctor_name.gsub(DOCTOR_NAME,' ')
 
-  
+  # Other name
+  converted_data << o.slice(149)
+
+  # Numbered data
+  numbered_data = Array.new
+  numbered_data << o.slice(152..159).join(' ')
+  converted_data.concat(numbered_data)
 
   # Insurance
   if o.slice(167) == 'Y'
@@ -228,7 +234,7 @@ original_data.each do |o|
     converted_data << o.slice(167)
   end
 
-  #Output data to final array
+  # Output data to final array
   final_data << converted_data
 
 end
