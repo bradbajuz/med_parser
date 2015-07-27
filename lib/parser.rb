@@ -146,36 +146,36 @@ original_data.each do |o|
     converted_data << insurance_phone = empty_phone
   end
 
-  # Usually empty
-  converted_data << o.slice(57)
+  # Claim number? (Sometimes empty) 
+  converted_data << o.slice(56)
 
   # Insurance number
-  converted_data << o.slice(58)
+  converted_data << o.slice(57)
 
   # Insert a 4
   converted_data.insert(-1, number_four)
 
-  # Other is ,4, , , , ,( ) - , , ,4, , , , ,( ) - , , ,4,
+  # Other format is ,4, , , , ,( ) - , , ,4, , , , ,( ) - , , ,4,
 
   # Other Insurance name (sometimes empty)
-  converted_data << o.slice(60)
+  converted_data << o.slice(59)
 
   # Other Insurance address (sometimes empty)
-  converted_data << o.slice(61)
+  converted_data << o.slice(60)
 
   # Other Usually empty (sometimes empty)
-  converted_data << o.slice(62)
+  converted_data << o.slice(61)
 
   # Other Insurance address (sometimes empty)
   insurance_address = Array.new
   
-  insurance_address << o.slice(63..65)
+  insurance_address << o.slice(62..64)
   converted_data << insurance_address.join(' ')
 
   # Other Insurance phone number (sometimes empty)
   other_insurance_phone = ''
 
-  other_insurance_phone << o.slice(66)
+  other_insurance_phone << o.slice(65)
   if other_insurance_phone.match(PHONE)
     converted_data << other_insurance_phone.gsub(PHONE, '(\1) \2-\3')
   elsif other_insurance_phone.match('UNK')
@@ -184,11 +184,13 @@ original_data.each do |o|
     converted_data << other_insurance_phone = empty_phone
   end
 
-  # Other usually empty
+  # Number
+  converted_data << o.slice(67)
 
-  2.times do
-    converted_data.insert(-1, empty_space)
-  end
+  #Insurance number
+  converted_data << o.slice(68)
+
+  # Other usually empty
 
   converted_data.insert(-1, number_four)
 
@@ -228,9 +230,9 @@ original_data.each do |o|
 end
 
 # For debugging
-p final_data
-puts "#############################"
-p original_data
+# p final_data
+# puts "#############################"
+# p original_data
 
 p "Total patients: #{final_data.length}"
 
