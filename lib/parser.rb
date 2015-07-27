@@ -211,9 +211,9 @@ original_data.each do |o|
   # Hick picks (HCPCS Codes)
   converted_data << o.slice(134..143).join(' ')
 
-  # Number data with doctors name at end
-  number_data = o.slice(144..165)
-  converted_data.concat(number_data)
+  # Doctors name
+  doctor_name = o.slice(144..153)
+  converted_data.concat(doctor_name)
 
   # Insurance
   if o.slice(167) == 'Y'
