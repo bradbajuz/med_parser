@@ -205,8 +205,8 @@ original_data.each do |o|
   # Dr Info
   converted_data << 'Dr Info'
 
-  # Ailment
-  converted_data << o.slice(134..135).join('')
+  # Diagnostic code and ailment
+  converted_data << o.slice(132..133).join(' ')
 
   # String of numbers
   converted_data << o.slice(136..143).join(' ')
