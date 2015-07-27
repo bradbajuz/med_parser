@@ -149,7 +149,7 @@ original_data.each do |o|
   # Claim number? (Sometimes empty) 
   converted_data << o.slice(56)
 
-  # Insurance number
+  # Second claim number or insurance number?
   converted_data << o.slice(57)
 
   # Insert a 4
@@ -182,10 +182,10 @@ original_data.each do |o|
     converted_data << other_insurance_phone = empty_phone
   end
 
-  # Number
+  # Other number
   converted_data << o.slice(67)
 
-  #Insurance number
+  # Other insurance number
   converted_data << o.slice(68)
 
   # Other usually empty
