@@ -209,7 +209,7 @@ original_data.each do |o|
   converted_data << o.slice(132..133).join(' ')
 
   # Hick picks (HCPCS Codes)
-  converted_data << o.slice(134..143).join(' ')
+  converted_data << o.slice(134..143).join(' ').strip
 
   # Doctors name
   doctor_name = o.slice(144..153)
