@@ -1,9 +1,8 @@
-# Medical Patient Data to CSV Converter
+# Medical Patient Data to CSV Parser
 
-## DCH and FAY Data Ruby Converter to CSV
-  - Takes a DCH and FAY text/csv file and parses line by line each patient data
+## Ruby Based Parser for DCH and FAY CSV based data to CSV based data for Collect
+  - Takes a DCH and FAY CSV file and parses line by line each patient data
   - Parsed data is placed into a CSV formatted file
-  - Accounts for changes in accounts numbers
   - Exported CSV files follow file name output as follows:
 
 ### DCH
