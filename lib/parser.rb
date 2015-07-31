@@ -3,7 +3,7 @@ require 'csv'
 #Regex
 PHONE = /(\d{3})(\d{3})(\d{4})/
 INCOMPLETE_PHONE = /\d/
-PATIENT_SSN = /(\d{3})(\d{2})(\d{3})/
+PATIENT_SSN = /(\d{3})(\d{2})(\d{4})/
 DOCTOR_NAME = /[\s,]/
 
 original_data = Array.new
@@ -12,19 +12,13 @@ final_data = Array.new
 Dir.chdir '..'
 Dir.chdir 'convert'
 filename = Dir.glob('*.csv').each do |f|
-  CSV.foreach(f) do |raw_file| 
+  CSV.foreach(f, skip_blanks: true) do |raw_file| 
     original_data << raw_file
   end
 end
 
-# Remove last element in array that has unneded data
-# Expecting up to 1 blank line and last line with total or just line with total
-# Broken if not meeting above rquirements.
-if original_data.last.empty?
-  original_data.pop(2)
-else
-  original_data.pop
-end
+# Remove last element in array that has total
+original_data.pop
 
 # Start processing fields
 original_data.each do |o|
@@ -87,9 +81,9 @@ original_data.each do |o|
 
   patient_ssn << o.slice(12)
   if patient_ssn.empty?
-    converted_data << patient_ssn = ' - - '
+    converted_data << patient_ssn << ' - - '
   else
-    converted_data << patient_ssn.gsub(PATIENT_SSN, '\1-\2-\3')
+    p patient_ssn.gsub(PATIENT_SSN, '\1-\2-\3')
   end
   
   # Phone number
@@ -99,9 +93,9 @@ original_data.each do |o|
   if patient_phone.match(PHONE)
     converted_data << patient_phone.gsub(PHONE, '(\1) \2-\3')
   elsif patient_phone.match('UNK')
-    converted_data << patient_phone = '(UNK) - '
+    converted_data << patient_phone << '(UNK) - '
   else
-    converted_data << patient_phone = empty_phone
+    converted_data << patient_phone << empty_phone
   end
 
   # Patient total
@@ -140,11 +134,11 @@ original_data.each do |o|
   if insurance_phone.match(PHONE)
     converted_data << insurance_phone.gsub(PHONE, '(\1) \2-\3')
   elsif insurance_phone.match('UNK')
-    converted_data << insurance_phone = '(UNK) - '
+    converted_data << insurance_phone << '(UNK) - '
   elsif insurance_phone.match(INCOMPLETE_PHONE)
     converted_data << insurance_phone.gsub(PHONE, '(\1) \2-\3')
   else
-    converted_data << insurance_phone = empty_phone
+    converted_data << insurance_phone << empty_phone
   end
 
   # Claim number? (Sometimes empty) 
@@ -178,9 +172,9 @@ original_data.each do |o|
   if other_insurance_phone.match(PHONE)
     converted_data << other_insurance_phone.gsub(PHONE, '(\1) \2-\3')
   elsif other_insurance_phone.match('UNK')
-    converted_data << other_insurance_phone = '(UNK) - '
+    converted_data << other_insurance_phone << '(UNK) - '
   else
-    converted_data << other_insurance_phone = empty_phone
+    converted_data << other_insurance_phone << empty_phone
   end
 
   # Other number

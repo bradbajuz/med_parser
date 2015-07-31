@@ -6,19 +6,13 @@ final_data = Array.new
 Dir.chdir '..'
 Dir.chdir 'convert'
 filename = Dir.glob('*.csv').each do |f|
-  CSV.foreach(f) do |raw_file|
+  CSV.foreach(f, skip_blanks: true) do |raw_file|
     original_data << raw_file
   end
 end
 
-# Remove last element in array that has unneded data
-# Expecting up to 1 blank line and last line with total or just line with total
-# Broken if not meeting above rquirements.
-if original_data.last.empty?
-  original_data.pop(2)
-else
-  original_data.pop
-end
+# Remove last element in array that has total
+original_data.pop
 
 # Start processing fields
 original_data.each do |o|
