@@ -11,6 +11,15 @@ filename = Dir.glob('*.csv').each do |f|
   end
 end
 
+# Get last line total before it's removed
+before_line_total = original_data.dup
+
+last_line_total = Array.new
+line_total = ''
+
+last_line_total << original_data.last.slice(0)
+line_total << last_line_total.slice(0).to_s
+
 # Remove last element in array that has total
 original_data.pop
 
@@ -63,7 +72,15 @@ end
 # puts "#############################""
 # p original_data
 
-p "Total patients: #{final_data.length}"
+# Compare total patients before and after to make sure
+# patient line didn't get removed during pop on line 24
+if final_data.length.to_i == line_total.to_i
+  p "Total patients: #{final_data.length}"
+else
+  p "Error in total patients. Please check last line in data and add in line with total lines."
+  p "Before total = #{before_line_total.length} and after total = #{final_data.length}"
+  p "Last line with account #{line_total} is being removed doesn't match total of #{final_data.length}"
+end
 
 # Use for outputting adjustment file
 Dir.chdir '..'
