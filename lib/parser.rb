@@ -82,8 +82,11 @@ original_data.each do |o|
   patient_ssn << o.slice(12)
   if patient_ssn.empty?
     converted_data << patient_ssn << ' - - '
+  elsif patient_ssn.length == 8
+    patient_ssn.insert(0, '0')
+    converted_data << patient_ssn.gsub(PATIENT_SSN, '\1-\2-\3')
   else
-    p patient_ssn.gsub(PATIENT_SSN, '\1-\2-\3')
+    converted_data << patient_ssn.gsub(PATIENT_SSN, '\1-\2-\3')
   end
   
   # Phone number
