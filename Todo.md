@@ -84,7 +84,7 @@
 
 ~~Implement Adjustments~~
 
-~~ Check for nil at end of file~~
+~~Check for nil at end of file~~
 
 #### TODO
 
