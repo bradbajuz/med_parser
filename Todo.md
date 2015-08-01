@@ -84,9 +84,8 @@
 
 ~~Implement Adjustments~~
 
+~~ Check for nil at end of file~~
+
 #### TODO
-- Check for nil at end of file
 
 ### BUGS
-- Program will fail if imported file has more than two empty lines because of nil. Check file before import as possible fix?
-- Watch out for array that get inserted on last line that only includes "Acvite, ACT, , ". Issue with multiple blank lines and/or lines with non-patient data
