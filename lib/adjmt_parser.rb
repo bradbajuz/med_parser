@@ -87,7 +87,7 @@ Dir.chdir '..'
 Dir.chdir 'converted'
 filename.each do |new_file|
 
-  File.open("ADJUSTMENTS #{new_file}", 'w') do |f|
+  File.open("ADJUSTMENT #{new_file}", 'w') do |f|
     f.write(final_data.inject([]) { |csv, row| csv << CSV.generate_line(row) }.join(''))
   end
 end
