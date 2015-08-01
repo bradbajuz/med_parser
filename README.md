@@ -20,5 +20,5 @@
     4. ADJUSTMENT FAY LARGE.csv
 
 ## Todo
-  + Needs to be able to parse adjustments into separate CSV files
+  + Needs to be able to multiple files at a time and create multiple files
   - See Full [Todo Checklist] (https://github.com/bradbajuz/med-parser/blob/master/Todo.md)
