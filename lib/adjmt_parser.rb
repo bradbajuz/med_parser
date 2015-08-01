@@ -91,3 +91,31 @@ filename.each do |new_file|
     f.write(final_data.inject([]) { |csv, row| csv << CSV.generate_line(row) }.join(''))
   end
 end
+
+require 'tk'
+
+root = TkRoot.new
+root.withdraw()
+
+if final_data.length.to_i == line_total.to_i
+  infoMsgBox = Tk.messageBox(
+    'type'    => 'ok',  
+    'icon'    => 'info', 
+    'title'   => "DCH, FAY and Medicaid Parser",
+    'message' => "Success!\nTotal patients: #{final_data.length}"
+  )
+  root.destroy
+  Tk.mainloop
+else
+  errorMsgBox = Tk.messageBox(
+    'type'    => 'ok',
+    'icon'    => 'warning',
+    'title'   => 'Incorrect Patient Total',
+    'message' => "Before total = #{before_line_total.length} vs after total = #{final_data.length}
+  \nHow to fix:
+  \nThe last line with account# #{line_total} is being removed and doesn't match patient total #{final_data.length}
+  \nAdd a new line at end of original file with the number '#{before_line_total.length}' and run converter again."
+  )
+  root.destroy
+  Tk.mainloop
+end
