@@ -90,7 +90,7 @@ original_data.each do |o|
 
   patient_ssn << o.slice(12)
   if patient_ssn.empty?
-    converted_data << patient_ssn << ' - - '
+    converted_data << patient_ssn = ' - - '
   elsif patient_ssn.length == 8
     patient_ssn.insert(0, '0')
     converted_data << patient_ssn.gsub(PATIENT_SSN, '\1-\2-\3')
@@ -105,9 +105,9 @@ original_data.each do |o|
   if patient_phone.match(PHONE)
     converted_data << patient_phone.gsub(PHONE, '(\1) \2-\3')
   elsif patient_phone.match('UNK')
-    converted_data << patient_phone << '(UNK) - '
+    converted_data << patient_phone = '(UNK) - '
   else
-    converted_data << patient_phone << empty_phone
+    converted_data << patient_phone = empty_phone
   end
 
   # Patient total
@@ -146,11 +146,11 @@ original_data.each do |o|
   if insurance_phone.match(PHONE)
     converted_data << insurance_phone.gsub(PHONE, '(\1) \2-\3')
   elsif insurance_phone.match('UNK')
-    converted_data << insurance_phone << '(UNK) - '
+    converted_data << insurance_phone = '(UNK) - '
   elsif insurance_phone.match(INCOMPLETE_PHONE)
     converted_data << insurance_phone.gsub(PHONE, '(\1) \2-\3')
   else
-    converted_data << insurance_phone << empty_phone
+    converted_data << insurance_phone = empty_phone
   end
 
   # Claim number? (Sometimes empty) 
@@ -184,9 +184,9 @@ original_data.each do |o|
   if other_insurance_phone.match(PHONE)
     converted_data << other_insurance_phone.gsub(PHONE, '(\1) \2-\3')
   elsif other_insurance_phone.match('UNK')
-    converted_data << other_insurance_phone << '(UNK) - '
+    converted_data << other_insurance_phone = '(UNK) - '
   else
-    converted_data << other_insurance_phone << empty_phone
+    converted_data << other_insurance_phone = empty_phone
   end
 
   # Other number
@@ -195,9 +195,10 @@ original_data.each do |o|
   # Other insurance number
   converted_data << o.slice(68)
 
-  # Other usually empty
-
+  # Insert a 4
   converted_data.insert(-1, number_four)
+
+  # Other usually empty
 
   4.times do
     converted_data.insert(-1, empty_space)
