@@ -12,13 +12,13 @@ final_data = Array.new
 Dir.chdir '..'
 Dir.chdir 'convert'
 filename = Dir.glob('*.csv').each do |f|
-  CSV.foreach(f, skip_blanks: true) do |raw_file| 
+  CSV.foreach(f, skip_blanks: true) do |raw_file|
     original_data << raw_file
   end
 end
 
 # Get last line total before it's removed
-before_line_total = original_data.dup
+# before_line_total = original_data.dup
 
 last_line_total = Array.new
 line_total = ''
