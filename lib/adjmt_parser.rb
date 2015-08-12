@@ -43,7 +43,9 @@ original_data.each do |o|
   # Only needed if  there are two leading zeros before D
   # converted_data[3].slice!(0..1)
 
-  if converted_data[3].slice(1) == '0'
+  if converted_data[3].slice(1..2) == '00'
+    converted_data[3].slice!(1..2)
+  elsif converted_data[3].slice(1) == '0'
     converted_data[3].slice!(1)
   end
 
