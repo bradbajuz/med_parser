@@ -21,4 +21,4 @@
 
 ## Todo
   + Needs to be able to multiple files at a time and create multiple files
-  - See Full [Todo Checklist] (https://github.com/bradbajuz/med-parser/blob/master/Todo.md)
+  - See Full [Todo Checklist](https://github.com/bradbajuz/med-parser/blob/master/Todo.md)
