@@ -1,4 +1,6 @@
 require 'csv'
+require 'money'
+I18n.enforce_available_locales = false
 
 #Regex
 PHONE = /(\d{3})(\d{3})(\d{4})/

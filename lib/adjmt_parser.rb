@@ -32,7 +32,7 @@ original_data.each do |o|
   converted_data.insert(0, '501', 'Adjustment per client', '3')
 
   # BEGIN Check for nil in original data and replace with empty string
-  o.map! { |x| x ? x : ''}
+  o.map! { |x| x ? x : '' }
 
   # Add in account number
   converted_data << o.slice(0)
@@ -51,17 +51,14 @@ original_data.each do |o|
   patient_paid = ''
 
   patient_total << o.slice(28)
-  patient_total.gsub!(/^0+/, '')
 
   patient_paid << o.slice(26)
 
   patient_owe = patient_total.to_i.abs - patient_paid.to_i.abs
 
-  if patient_owe.to_s[0] == '0'
-    converted_data << patient_owe.to_s
-  else
-    converted_data << patient_owe.to_s.insert(-3, '.')
-  end
+  converted_data << Money.new(patient_owe).format(with_currency: false,
+                                                  symbol: false,
+                                                  thousands_separator: false)
 
   #Output data to final array
   final_data << converted_data
@@ -99,22 +96,22 @@ root.withdraw()
 
 if final_data.length.to_i == line_total.to_i
   infoMsgBox = Tk.messageBox(
-    'type'    => 'ok',  
-    'icon'    => 'info', 
-    'title'   => "DCH, FAY and Medicaid Parser",
-    'message' => "Success!\nTotal patients: #{final_data.length}"
+      'type' => 'ok',
+      'icon' => 'info',
+      'title' => "DCH, FAY and Medicaid Parser",
+      'message' => "Success!\nTotal patients: #{final_data.length}"
   )
   root.destroy
   Tk.mainloop
 else
   errorMsgBox = Tk.messageBox(
-    'type'    => 'ok',
-    'icon'    => 'warning',
-    'title'   => 'Incorrect Patient Total',
-    'message' => "Before total = #{before_line_total.length} vs after total = #{final_data.length}
-  \nHow to fix:
+      'type' => 'ok',
+      'icon' => 'warning',
+      'title' => 'Incorrect Patient Total',
+      'message' => "Before total = #{before_line_total.length} vs after total = #{final_data.length}
+      \nHow to fix:
   \nThe last line with account# #{line_total} is being removed and doesn't match patient total #{final_data.length}
-  \nAdd a new line at end of original file with the number '#{before_line_total.length}' and run converter again."
+      \nAdd a new line at end of original file with the number '#{before_line_total.length}' and run converter again."
   )
   root.destroy
   Tk.mainloop
