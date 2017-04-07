@@ -1,5 +1,3 @@
-require 'csv'
-
 original_data = Array.new
 final_data = Array.new
 
