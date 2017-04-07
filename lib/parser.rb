@@ -15,7 +15,7 @@ final_data = Array.new
 Dir.chdir '..'
 Dir.chdir 'convert'
 filename = Dir.glob('*.csv').each do |f|
-  CSV.foreach(f, skip_blanks: true) do |raw_file| 
+  CSV.foreach(f, skip_blanks: true) do |raw_file|
     original_data << raw_file
   end
 end
@@ -46,7 +46,7 @@ original_data.each do |o|
   converted_data.insert(0, 'Acvite', 'ACT')
 
   # BEGIN Check for nil in original data and replace with empty string
-  o.map! { |x| x ? x : ''}
+  o.map! { |x| x ? x : '' }
 
   # Add in account number
   converted_data << o.slice(0)
@@ -63,7 +63,7 @@ original_data.each do |o|
 
   # Setup patient name to be processed
   patient_name = Array.new
-  
+
   patient_name << o.slice(3..4)
   converted_data << patient_name.join(' ')
 
@@ -100,7 +100,7 @@ original_data.each do |o|
   else
     converted_data << patient_ssn.gsub(PATIENT_SSN, '\1-\2-\3')
   end
-  
+
   # Phone number
   patient_phone = ''
 
@@ -120,8 +120,8 @@ original_data.each do |o|
   patient_total.to_i.abs
 
   converted_data << Money.new(patient_total).format(with_currency: false,
-                                                  symbol: false,
-                                                  thousands_separator: false)
+                                                    symbol: false,
+                                                    thousands_separator: false)
 
   # Next two fileds with eight digit numbers
   converted_data << o.slice(29)
@@ -141,7 +141,7 @@ original_data.each do |o|
 
   # Insurance address
   insurance_address = Array.new
-  
+
   insurance_address << o.slice(51..53)
   converted_data << insurance_address.join(' ')
 
@@ -179,7 +179,7 @@ original_data.each do |o|
 
   # Other Insurance address (sometimes empty)
   insurance_address = Array.new
-  
+
   insurance_address << o.slice(62..64)
   converted_data << insurance_address.join(' ')
 
@@ -226,11 +226,11 @@ original_data.each do |o|
   converted_data << o.slice(134..143).join(' ').strip
 
   # Doctors name
-  converted_data << o.slice(144).gsub(DOCTOR_NAME,' ')
+  converted_data << o.slice(144).gsub(DOCTOR_NAME, ' ')
 
   doctor_name = ''
   doctor_name << o.slice(146..147).join('')
-  converted_data << doctor_name.gsub(DOCTOR_NAME,' ')
+  converted_data << doctor_name.gsub(DOCTOR_NAME, ' ')
 
   # Other name
   converted_data << o.slice(149)
@@ -271,13 +271,11 @@ end
 Dir.chdir '..'
 Dir.chdir 'converted'
 filename.each do |new_file|
-  
+
   File.open(new_file, 'w') do |f|
     f.write(final_data.inject([]) { |csv, row| csv << CSV.generate_line(row) }.join(''))
   end
 end
-
-
 
 
 # Bring in adjustment script and run
