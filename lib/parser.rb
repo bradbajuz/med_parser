@@ -3,14 +3,14 @@ require 'tk'
 require 'money'
 I18n.enforce_available_locales = false
 
-#Regex
+# Regex
 PHONE = /(\d{3})(\d{3})(\d{4})/
 INCOMPLETE_PHONE = /\d/
 PATIENT_SSN = /(\d{3})(\d{2})(\d{4})/
 DOCTOR_NAME = /[\s,]/
 
-original_data = Array.new
-final_data = Array.new
+original_data = []
+final_data = []
 
 Dir.chdir '..'
 Dir.chdir 'convert'
@@ -20,10 +20,11 @@ filename = Dir.glob('*.csv').each do |f|
   end
 end
 
+# For DEBUGGING
 # Get last line total before it's removed
-before_line_total = original_data.dup
+# before_line_total = original_data.dup
 
-last_line_total = Array.new
+last_line_total = []
 line_total = ''
 
 last_line_total << original_data.last.slice(0)
@@ -32,66 +33,71 @@ line_total << last_line_total.slice(0).to_s
 # Remove last element in array that has total
 original_data.pop
 
-# Start processing fields
-original_data.each do |o|
-  converted_data = Array.new
+def join_fields(data)
+  data.join(' ')
+end
 
-  # Setup reoccurring variables
+def reoccurring_variables
   empty_space = ' '
   number_four = '4'
   empty_phone = '( ) - '
+  return empty_phone, empty_space, number_four
+end
 
-  # Needed at beginning of array for each patient
-  # Watch out for array that get inserted on last line that only includes below line of code
+def beginning_fields(converted_data)
   converted_data.insert(0, 'Acvite', 'ACT')
+end
 
-  # BEGIN Check for nil in original data and replace with empty string
-  o.map! { |x| x ? x : '' }
+def nil_check(o_data)
+  o_data.map! { |x| x ? x : '' }
+end
 
-  # Add in account number
-  converted_data << o.slice(0)
+def patient_account_number(converted_data, o_data)
+  converted_data << o_data.slice(0)
+end
 
-  # Remove leading zeros from account number
-  # This will fail if imported file has more than two empty lines
+def remove_leading_zeros(converted_data)
+  converted_data[2].slice!(1) if converted_data[2].slice(1) == '0'
+end
 
-  # Only needed if  there are two leading zeros before D
-  # converted_data[2].slice!(0..1)
+def patient_name(o_data, converted_data)
+  patient_name_array = []
 
-  if converted_data[2].slice(1) == '0'
-    converted_data[2].slice!(1)
-  end
+  patient_name_array << o_data.slice(3..4)
+  converted_data << join_fields(patient_name_array)
+end
 
-  # Setup patient name to be processed
-  patient_name = Array.new
+def patient_address(o_data, converted_data)
+  patient_address_array = []
 
-  patient_name << o.slice(3..4)
-  converted_data << patient_name.join(' ')
+  patient_address_array << o_data.slice(5)
+  converted_data << join_fields(patient_address_array)
+end
 
-  # Setup patient address to be processed
-  patient_address = Array.new
+def empty_field(converted_data, o_data)
+  converted_data << o_data.slice(6)
+end
 
-  patient_address << o.slice(5)
-  converted_data << patient_address.join(' ')
+def patient_city(converted_data, o_data)
+  converted_data << o_data.slice(8)
+end
 
-  # Usually empty
-  converted_data << o.slice(6)
+def patient_state(converted_data, o_data)
+  converted_data << o_data.slice(9)
+end
 
-  # City
-  converted_data << o.slice(8)
+def patient_zipcode(converted_data, o_data)
+  converted_data << o_data.slice(10)
+end
 
-  # State
-  converted_data << o.slice(9)
+def eight_digit_string(converted_data, o_data)
+  converted_data << o_data.slice(11)
+end
 
-  # Zip
-  converted_data << o.slice(10)
-
-  # 8 digit string
-  converted_data << o.slice(11)
-
-  # SSN
+def patient_ssn(converted_data, o_data)
   patient_ssn = ''
 
-  patient_ssn << o.slice(12)
+  patient_ssn << o_data.slice(12)
   if patient_ssn.empty?
     converted_data << patient_ssn = ' - - '
   elsif patient_ssn.length == 8
@@ -100,11 +106,12 @@ original_data.each do |o|
   else
     converted_data << patient_ssn.gsub(PATIENT_SSN, '\1-\2-\3')
   end
+end
 
-  # Phone number
+def patient_phone_number(converted_data, empty_phone, o_data)
   patient_phone = ''
 
-  patient_phone << o.slice(13)
+  patient_phone << o_data.slice(13)
   if patient_phone.match(PHONE)
     converted_data << patient_phone.gsub(PHONE, '(\1) \2-\3')
   elsif patient_phone.match('UNK')
@@ -112,8 +119,9 @@ original_data.each do |o|
   else
     converted_data << patient_phone = empty_phone
   end
+end
 
-  # Patient total
+def patient_total(converted_data, o)
   patient_total = ''
 
   patient_total << o.slice(28)
@@ -122,33 +130,40 @@ original_data.each do |o|
   converted_data << Money.new(patient_total).format(with_currency: false,
                                                     symbol: false,
                                                     thousands_separator: false)
+end
 
-  # Next two fileds with eight digit numbers
-  converted_data << o.slice(29)
-  converted_data << o.slice(30)
+def eight_digit_numbers(converted_data, o_data)
+  converted_data << o_data.slice(29)
+  converted_data << o_data.slice(30)
+end
 
-  # Insert a 4
+def insert_four(converted_data, number_four)
   converted_data.insert(-1, number_four)
+end
 
-  # Insert insurance
-  converted_data << o.slice(48)
+def insurance_name(converted_data, o_data)
+  converted_data << o_data.slice(48)
+end
 
-  # Insurance address
-  converted_data << o.slice(49)
+def insurance_address(converted_data, o_data)
+  converted_data << o_data.slice(49)
+end
 
-  # Usually empty
-  converted_data << o.slice(50)
+def insurance_empty_field(converted_data, o_data)
+  converted_data << o_data.slice(50)
+end
 
-  # Insurance address
-  insurance_address = Array.new
+def insurance_alt_address(converted_data, o_data)
+  insurance_address = []
 
-  insurance_address << o.slice(51..53)
-  converted_data << insurance_address.join(' ')
+  insurance_address << o_data.slice(51..53)
+  converted_data << join_fields(insurance_address)
+end
 
-  # Insurance phone number
+def insurance_phone_number(converted_data, empty_phone, o_data)
   insurance_phone = ''
 
-  insurance_phone << o.slice(54)
+  insurance_phone << o_data.slice(54)
   if insurance_phone.match(PHONE)
     converted_data << insurance_phone.gsub(PHONE, '(\1) \2-\3')
   elsif insurance_phone.match('UNK')
@@ -158,35 +173,39 @@ original_data.each do |o|
   else
     converted_data << insurance_phone = empty_phone
   end
+end
 
-  # Claim number? (Sometimes empty) 
-  converted_data << o.slice(56)
+def claim_number_one(converted_data, o_data)
+  converted_data << o_data.slice(56)
+end
 
-  # Second claim number or insurance number?
-  converted_data << o.slice(57)
+def claim_number_two(converted_data, o_data)
+  converted_data << o_data.slice(57)
+end
 
-  # Insert a 4
-  converted_data.insert(-1, number_four)
+def secondary_insurance_name(converted_data, o_data)
+  converted_data << o_data.slice(59)
+end
 
-  # Other Insurance name (sometimes empty)
-  converted_data << o.slice(59)
+def secondary_insurance_address(converted_data, o_data)
+  converted_data << o_data.slice(60)
+end
 
-  # Other Insurance address (sometimes empty)
-  converted_data << o.slice(60)
+def secondary_insurance_empty_field(converted_data, o_data)
+  converted_data << o_data.slice(61)
+end
 
-  # Other Usually empty (sometimes empty)
-  converted_data << o.slice(61)
+def secondary_alt_insurance_address(converted_data, o_data)
+  insurance_address = []
 
-  # Other Insurance address (sometimes empty)
-  insurance_address = Array.new
+  insurance_address << o_data.slice(62..64)
+  converted_data << join_fields(insurance_address)
+end
 
-  insurance_address << o.slice(62..64)
-  converted_data << insurance_address.join(' ')
-
-  # Other Insurance phone number (sometimes empty)
+def secondary_insurance_phone(converted_data, empty_phone, o_data)
   other_insurance_phone = ''
 
-  other_insurance_phone << o.slice(65)
+  other_insurance_phone << o_data.slice(65)
   if other_insurance_phone.match(PHONE)
     converted_data << other_insurance_phone.gsub(PHONE, '(\1) \2-\3')
   elsif other_insurance_phone.match('UNK')
@@ -194,62 +213,165 @@ original_data.each do |o|
   else
     converted_data << other_insurance_phone = empty_phone
   end
+end
 
-  # Other number
-  converted_data << o.slice(67)
+def other_number(converted_data, o_data)
+  converted_data << o_data.slice(67)
+end
 
-  # Other insurance number
-  converted_data << o.slice(68)
+def other_insurance_number(converted_data, o_data)
+  converted_data << o_data.slice(68)
+end
 
-  # Insert a 4
-  converted_data.insert(-1, number_four)
+def insert_dr_info(converted_data)
+  converted_data << 'Dr Info'
+end
+
+def dx_and_ailment(converted_data, o_data)
+  converted_data << join_fields(o_data.slice(132..133))
+end
+
+def hcpcs_codes(converted_data, o_data)
+  converted_data << join_fields(o_data.slice(134..143)).strip
+end
+
+def doctors_name(converted_data, o_data)
+  converted_data << o_data.slice(144).gsub(DOCTOR_NAME, ' ')
+
+  doctor_name = ''
+  doctor_name << o_data.slice(146..147).join('')
+  converted_data << doctor_name.gsub(DOCTOR_NAME, ' ')
+end
+
+def other_doctor_name(converted_data, o_data)
+  converted_data << o_data.slice(149)
+end
+
+def numbered_data(converted_data, o_data)
+  numbered_data = []
+  numbered_data << join_fields(o_data.slice(152..159))
+  converted_data.concat(numbered_data)
+end
+
+def insurance_present(converted_data, o_data)
+  if o_data.slice(167) == 'Y'
+    converted_data << join_fields(o_data.slice(166..167))
+  else
+    converted_data << o_data.slice(167)
+  end
+end
+
+
+# Start processing fields
+original_data.each do |o_data|
+  converted_data = []
+
+  empty_phone, empty_space, number_four = reoccurring_variables
+
+  # Needed at beginning of array for each patient
+  # Watch out for array that get inserted on last line that only includes below line of code
+  beginning_fields(converted_data)
+
+  # BEGIN Check for nil in original data and replace with empty string
+  nil_check(o_data)
+
+  patient_account_number(converted_data, o_data)
+
+  # Remove leading zeros from account number
+  # This will fail if imported file has more than two empty lines
+  # Only needed if  there are two leading zeros before D
+  # converted_data[2].slice!(0..1)
+  remove_leading_zeros(converted_data)
+
+  patient_name(o_data, converted_data)
+
+  patient_address(o_data, converted_data)
+
+  # Usually empty
+  empty_field(converted_data, o_data)
+
+  patient_city(converted_data, o_data)
+
+  patient_state(converted_data, o_data)
+
+  patient_zipcode(converted_data, o_data)
+
+  eight_digit_string(converted_data, o_data)
+
+  patient_ssn(converted_data, o_data)
+
+  patient_phone_number(converted_data, empty_phone, o_data)
+
+  patient_total(converted_data, o_data)
+
+  eight_digit_numbers(converted_data, o_data)
+
+  insert_four(converted_data, number_four)
+
+  insurance_name(converted_data, o_data)
+
+  insurance_address(converted_data, o_data)
+
+  # Usually empty
+  insurance_empty_field(converted_data, o_data)
+
+  insurance_alt_address(converted_data, o_data)
+
+  insurance_phone_number(converted_data, empty_phone, o_data)
+
+  # Claim number? (Sometimes empty)
+  claim_number_one(converted_data, o_data)
+
+  # Second claim number or insurance number?
+  claim_number_two(converted_data, o_data)
+
+  insert_four(converted_data, number_four)
+
+  secondary_insurance_name(converted_data, o_data)
+
+  secondary_insurance_address(converted_data, o_data)
+
+  secondary_insurance_empty_field(converted_data, o_data)
+
+  secondary_alt_insurance_address(converted_data, o_data)
+
+  secondary_insurance_phone(converted_data, empty_phone, o_data)
+
+  other_number(converted_data, o_data)
+
+  other_insurance_number(converted_data, o_data)
+
+  insert_four(converted_data, number_four)
 
   # Other usually empty
 
   4.times do
-    converted_data.insert(-1, empty_space)
+    insert_four(converted_data, empty_space)
   end
-  converted_data.insert(-1, empty_phone)
+  insert_four(converted_data, empty_phone)
 
   2.times do
-    converted_data.insert(-1, empty_space)
+    insert_four(converted_data, empty_space)
   end
-  converted_data.insert(-1, number_four)
 
-  # Dr Info
-  converted_data << 'Dr Info'
+  insert_four(converted_data, number_four)
 
-  # Diagnostic code and ailment
-  converted_data << o.slice(132..133).join(' ')
+  insert_dr_info(converted_data)
 
-  # Hick picks (HCPCS Codes)
-  converted_data << o.slice(134..143).join(' ').strip
+  dx_and_ailment(converted_data, o_data)
 
-  # Doctors name
-  converted_data << o.slice(144).gsub(DOCTOR_NAME, ' ')
+  hcpcs_codes(converted_data, o_data)
 
-  doctor_name = ''
-  doctor_name << o.slice(146..147).join('')
-  converted_data << doctor_name.gsub(DOCTOR_NAME, ' ')
+  doctors_name(converted_data, o_data)
 
-  # Other name
-  converted_data << o.slice(149)
+  other_doctor_name(converted_data, o_data)
 
-  # Numbered data
-  numbered_data = Array.new
-  numbered_data << o.slice(152..159).join(' ')
-  converted_data.concat(numbered_data)
+  numbered_data(converted_data, o_data)
 
-  # Insurance
-  if o.slice(167) == 'Y'
-    converted_data << o.slice(166..167).join(' ')
-  else
-    converted_data << o.slice(167)
-  end
+  insurance_present(converted_data, o_data)
 
   # Output data to final array
   final_data << converted_data
-
 end
 
 # For debugging
