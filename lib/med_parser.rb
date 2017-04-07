@@ -1,1 +1,1 @@
-require 'med_parser/parser'
+require_relative 'med_parser/parser'
