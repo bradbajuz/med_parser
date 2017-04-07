@@ -116,8 +116,11 @@ original_data.each do |o|
   patient_total = ''
 
   patient_total << o.slice(28)
-  patient_total.gsub!(/^0+/, '')
-  converted_data << patient_total.insert(-3, '.')
+  patient_total.to_i.abs
+
+  converted_data << Money.new(patient_total).format(with_currency: false,
+                                                  symbol: false,
+                                                  thousands_separator: false)
 
   # Next two fileds with eight digit numbers
   converted_data << o.slice(29)
