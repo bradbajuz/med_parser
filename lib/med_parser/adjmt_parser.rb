@@ -2,7 +2,7 @@ original_data = Array.new
 final_data = Array.new
 
 Dir.chdir '..'
-Dir.chdir 'convert'
+Dir.chdir 'import'
 filename = Dir.glob('*.csv').each do |f|
   CSV.foreach(f, skip_blanks: true) do |raw_file|
     original_data << raw_file
@@ -79,7 +79,7 @@ end
 
 # Use for outputting adjustment file
 Dir.chdir '..'
-Dir.chdir 'converted'
+Dir.chdir 'export'
 filename.each do |new_file|
 
   File.open("ADJUSTMENT #{new_file}", 'w') do |f|

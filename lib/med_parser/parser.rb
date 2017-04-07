@@ -20,7 +20,7 @@ class MedParser
 
   def import_csv(from_file = '*.csv')
     Dir.chdir '..'
-    Dir.chdir 'convert'
+    Dir.chdir 'import'
     Dir.glob(from_file).each do |f|
       CSV.foreach(f, skip_blanks: true) do |raw_file|
         original_data << raw_file
@@ -30,7 +30,7 @@ class MedParser
 
   def filename
     Dir.chdir '..'
-    Dir.chdir 'convert'
+    Dir.chdir 'import'
     Dir.glob('*.csv').join('')
   end
 
@@ -390,7 +390,7 @@ class MedParser
 
   def export_csv_file(to_file = filename.to_s)
     Dir.chdir '..'
-    Dir.chdir 'converted'
+    Dir.chdir 'export'
     File.open(to_file, 'w') do |f|
       f.write(final_data.inject([]) { |csv, row| csv << CSV.generate_line(row) }.join(''))
     end
