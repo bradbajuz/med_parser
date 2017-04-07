@@ -87,13 +87,11 @@ filename.each do |new_file|
   end
 end
 
-require 'tk'
-
 root = TkRoot.new
-root.withdraw()
+root.withdraw
 
 if final_data.length.to_i == line_total.to_i
-  infoMsgBox = Tk.messageBox(
+  Tk.messageBox(
       'type' => 'ok',
       'icon' => 'info',
       'title' => "DCH, FAY and Medicaid Parser",
@@ -102,7 +100,7 @@ if final_data.length.to_i == line_total.to_i
   root.destroy
   Tk.mainloop
 else
-  errorMsgBox = Tk.messageBox(
+  Tk.messageBox(
       'type' => 'ok',
       'icon' => 'warning',
       'title' => 'Incorrect Patient Total',
