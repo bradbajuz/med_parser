@@ -6,17 +6,17 @@ class MedParser
 
   attr_accessor :original_data, :converted_data, :final_data
 
+  # Regex
+  PHONE = /(\d{3})(\d{3})(\d{4})/
+  INCOMPLETE_PHONE = /\d/
+  PATIENT_SSN = /(\d{3})(\d{2})(\d{4})/
+  DOCTOR_NAME = /[\s,]/
+
   def initialize
     @original_data = []
     @final_data = []
     @converted_data = converted_data
   end
-
-# Regex
-  PHONE = /(\d{3})(\d{3})(\d{4})/
-  INCOMPLETE_PHONE = /\d/
-  PATIENT_SSN = /(\d{3})(\d{2})(\d{4})/
-  DOCTOR_NAME = /[\s,]/
 
   def import_csv(from_file = '*.csv')
     Dir.chdir '..'
@@ -388,7 +388,7 @@ class MedParser
     end
   end
 
-  def export_csv_file(to_file="#{filename}")
+  def export_csv_file(to_file = filename.to_s)
     Dir.chdir '..'
     Dir.chdir 'converted'
     File.open(to_file, 'w') do |f|
