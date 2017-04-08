@@ -122,7 +122,7 @@ module MedParser
       end
     end
 
-    def run_convert
+    def run_med_parser
       import_csv
       filename
       total_debtors
@@ -133,6 +133,3 @@ module MedParser
     end
   end
 end
-
-new_convert = MedParser::Parser.new
-new_convert.run_convert
