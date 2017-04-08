@@ -9,7 +9,7 @@ module MedParser
     require 'money'
     I18n.enforce_available_locales = false
 
-    def parser_script
+    def parser
       original_data.each do |o_data|
         converted_data = []
 
@@ -127,7 +127,7 @@ module MedParser
       filename
       total_debtors
       remove_total
-      parser_script
+      parser
       export_csv_file
       launch_adjmt_parser
     end
