@@ -122,14 +122,13 @@ module MedParser
       end
     end
 
-    def run_med_parser
+    def run_parser
       import_csv
       filename
       total_debtors
       remove_total
       parser
       export_csv_file
-      launch_adjmt_parser
     end
   end
 end

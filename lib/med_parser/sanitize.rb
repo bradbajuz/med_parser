@@ -1,9 +1,10 @@
+require_relative 'log_total'
+
 module MedParser
   class Sanitize
-    def total_debtors
-      last_line_total = []
-      line_total = ''
+    include LogTotal
 
+    def total_debtors
       last_line_total << original_data.last.slice(0)
       line_total << last_line_total.slice(0).to_s
     end
