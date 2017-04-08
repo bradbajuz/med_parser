@@ -1,5 +1,5 @@
-require_relative 'file_handling.rb'
 require_relative 'fields'
+require_relative 'file_handling'
 
 module MedParser
   class Parser < FileHandling

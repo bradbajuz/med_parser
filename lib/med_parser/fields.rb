@@ -1,5 +1,5 @@
-require_relative 'join_fields.rb'
-require_relative 'repeating_variables.rb'
+require_relative 'join_fields'
+require_relative 'repeating_variables'
 
 module Fields
   include JoinFields
@@ -15,6 +15,10 @@ module Fields
     converted_data.insert(0, 'Acvite', 'ACT')
   end
 
+  def adjmt_beginning_fields(converted_data)
+    converted_data.insert(0, '501', 'Adjustment per client', '3')
+  end
+
   def nil_check(o_data)
     o_data.map! { |x| x ? x : '' }
   end
@@ -25,6 +29,10 @@ module Fields
 
   def remove_leading_zeros(converted_data)
     converted_data[2].slice!(1) if converted_data[2].slice(1) == '0'
+  end
+
+  def adjmt_remove_leading_zeros(converted_data)
+    converted_data[3].slice!(1) if converted_data[3].slice(1) == '0'
   end
 
   def patient_name(o_data, converted_data)
@@ -88,15 +96,30 @@ module Fields
     end
   end
 
-  def patient_total(converted_data, o)
+  def patient_total(converted_data, o_data)
     patient_total = ''
 
-    patient_total << o.slice(28)
+    patient_total << o_data.slice(28)
     patient_total.to_i.abs
 
     converted_data << Money.new(patient_total).format(with_currency: false,
                                                       symbol: false,
                                                       thousands_separator: false)
+  end
+
+  def patient_amount_owed(converted_data, o_data)
+    patient_total = ''
+    patient_paid = ''
+
+    patient_total << o_data.slice(28)
+
+    patient_paid << o_data.slice(26)
+
+    patient_owe = patient_total.to_i.abs - patient_paid.to_i.abs
+
+    converted_data << Money.new(patient_owe).format(with_currency: false,
+                                                    symbol: false,
+                                                    thousands_separator: false)
   end
 
   def eight_digit_numbers(converted_data, o_data)

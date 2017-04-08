@@ -1,10 +1,11 @@
-require_relative 'sanitize.rb'
+require_relative 'sanitize'
 
 module MedParser
   class FileHandling < Sanitize
     attr_accessor :original_data,
                   :final_data,
                   :converted_data,
+                  :before_line_total,
                   :line_total,
                   :last_line_total
 
@@ -12,6 +13,7 @@ module MedParser
       @original_data = []
       @final_data = []
       @converted_data = converted_data
+      @before_line_total = before_line_total
       @line_total = ''
       @last_line_total = []
     end
@@ -24,6 +26,7 @@ module MedParser
           original_data << raw_file
         end
       end
+      @before_line_total = original_data.dup
     end
 
     def filename

@@ -1,7 +1,9 @@
-module LogTotal
-  def before_line_total
-    before_line_total = original_data.dup
+require_relative 'alert_gui'
 
+module LogTotal
+  include AlertGui
+
+  def before_line_total
     if final_data.length.to_i == line_total.to_i
       p "Total patients: #{final_data.length}"
     else
