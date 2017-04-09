@@ -34,7 +34,6 @@ module MedParser
 
     def run_adjmt_parser
       import_csv
-      filename
       total_debtors
       remove_total
       adjmt_parser

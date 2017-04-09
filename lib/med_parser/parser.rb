@@ -124,7 +124,6 @@ module MedParser
 
     def run_parser
       import_csv
-      filename
       total_debtors
       remove_total
       parser
