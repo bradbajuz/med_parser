@@ -6,7 +6,7 @@ module MedParser
     include Fields
 
     def adjmt_parser
-      begingio
+      begin
         original_data.each do |o_data|
           converted_data = []
 
