@@ -1,14 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    i18n (0.7.0)
-    money (6.7.1)
-      i18n (>= 0.6.4, <= 0.7.0)
+    i18n (0.8.1)
+    money (6.8.3)
+      i18n (>= 0.6.4, < 0.9)
       sixarm_ruby_unaccent (>= 1.1.1, < 2)
     sixarm_ruby_unaccent (1.1.1)
     tk (0.1.2)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
@@ -16,7 +17,7 @@ DEPENDENCIES
   tk
 
 RUBY VERSION
-   ruby 2.4.1p111
+   ruby 2.3.3p222
 
 BUNDLED WITH
    1.14.6
