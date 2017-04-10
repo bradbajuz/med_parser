@@ -47,7 +47,7 @@ module MedParser
       adjmt_parser
       before_line_total
       export_adjmt_csv_file
-      alert_gui
+      alert_total
     end
   end
 end

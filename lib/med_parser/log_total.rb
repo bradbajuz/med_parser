@@ -1,7 +1,7 @@
-require_relative 'alert_gui'
+require_relative 'alert_total'
 
 module LogTotal
-  include AlertGui
+  include AlertTotal
 
   def before_line_total
     if final_data.length.to_i == line_total.to_i
