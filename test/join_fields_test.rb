@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require_relative '../lib/med_parser/join_fields'
 
-class TestJoinFields < Minitest::Test
+class JoinFieldsTest < Minitest::Test
   def setup
     @test_join = Object.new
     @test_join.extend(JoinFields)
