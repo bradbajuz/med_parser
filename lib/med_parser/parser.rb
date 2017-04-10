@@ -5,7 +5,6 @@ module MedParser
   class Parser < FileHandling
     include Fields
     require 'csv'
-    require 'tk'
     require 'money'
     I18n.enforce_available_locales = false
 
