@@ -3,3 +3,7 @@ ruby '2.3.3'
 
 gem 'money'
 gem 'ocra'
+
+group :development, :test do
+  gem 'minitest'
+end
