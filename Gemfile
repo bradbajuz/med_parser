@@ -5,5 +5,6 @@ gem 'money'
 gem 'ocra'
 
 group :development, :test do
+  gem 'rubocop'
   gem 'minitest'
 end
