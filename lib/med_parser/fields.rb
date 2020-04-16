@@ -6,10 +6,10 @@ module Fields
   include RepeatingVariables
 
   # Regex
-  PHONE = /(\d{3})(\d{3})(\d{4})/
-  INCOMPLETE_PHONE = /\d/
-  PATIENT_SSN = /(\d{3})(\d{2})(\d{4})/
-  DOCTOR_NAME = /[\s,]/
+  PHONE = /(\d{3})(\d{3})(\d{4})/.freeze
+  INCOMPLETE_PHONE = /\d/.freeze
+  PATIENT_SSN = /(\d{3})(\d{2})(\d{4})/.freeze
+  DOCTOR_NAME = /[\s,]/.freeze
 
   def beginning_fields(converted_data)
     converted_data.insert(0, 'Acvite', 'ACT')
@@ -20,7 +20,7 @@ module Fields
   end
 
   def nil_check(o_data)
-    o_data.map! { |x| x ? x : '' }
+    o_data.map! { |x| x || '' }
   end
 
   def patient_account_number(converted_data, o_data)
@@ -87,13 +87,13 @@ module Fields
     patient_phone = ''
 
     patient_phone << o_data.slice(13)
-    if patient_phone.match(PHONE)
-      converted_data << patient_phone.gsub(PHONE, '(\1) \2-\3')
-    elsif patient_phone.match('UNK')
-      converted_data << patient_phone = '(UNK) - '
-    else
-      converted_data << patient_phone = empty_phone
-    end
+    converted_data << if patient_phone.match(PHONE)
+                        patient_phone.gsub(PHONE, '(\1) \2-\3')
+                      elsif patient_phone.match('UNK')
+                        patient_phone = '(UNK) - '
+                      else
+                        patient_phone = empty_phone
+                      end
   end
 
   def patient_total(converted_data, o_data)
@@ -154,15 +154,15 @@ module Fields
     insurance_phone = ''
 
     insurance_phone << o_data.slice(54)
-    if insurance_phone.match(PHONE)
-      converted_data << insurance_phone.gsub(PHONE, '(\1) \2-\3')
-    elsif insurance_phone.match('UNK')
-      converted_data << insurance_phone = '(UNK) - '
-    elsif insurance_phone.match(INCOMPLETE_PHONE)
-      converted_data << insurance_phone.gsub(PHONE, '(\1) \2-\3')
-    else
-      converted_data << insurance_phone = empty_phone
-    end
+    converted_data << if insurance_phone.match(PHONE)
+                        insurance_phone.gsub(PHONE, '(\1) \2-\3')
+                      elsif insurance_phone.match('UNK')
+                        insurance_phone = '(UNK) - '
+                      elsif insurance_phone.match(INCOMPLETE_PHONE)
+                        insurance_phone.gsub(PHONE, '(\1) \2-\3')
+                      else
+                        insurance_phone = empty_phone
+                      end
   end
 
   def claim_number_one(converted_data, o_data)
@@ -196,13 +196,13 @@ module Fields
     other_insurance_phone = ''
 
     other_insurance_phone << o_data.slice(65)
-    if other_insurance_phone.match(PHONE)
-      converted_data << other_insurance_phone.gsub(PHONE, '(\1) \2-\3')
-    elsif other_insurance_phone.match('UNK')
-      converted_data << other_insurance_phone = '(UNK) - '
-    else
-      converted_data << other_insurance_phone = empty_phone
-    end
+    converted_data << if other_insurance_phone.match(PHONE)
+                        other_insurance_phone.gsub(PHONE, '(\1) \2-\3')
+                      elsif other_insurance_phone.match('UNK')
+                        other_insurance_phone = '(UNK) - '
+                      else
+                        other_insurance_phone = empty_phone
+                      end
   end
 
   def other_number(converted_data, o_data)
@@ -244,10 +244,10 @@ module Fields
   end
 
   def insurance_present(converted_data, o_data)
-    if o_data.slice(167) == 'Y'
-      converted_data << join_fields(o_data.slice(166..167))
-    else
-      converted_data << o_data.slice(167)
-    end
+    converted_data << if o_data.slice(167) == 'Y'
+                        join_fields(o_data.slice(166..167))
+                      else
+                        o_data.slice(167)
+                      end
   end
 end
